@@ -1,0 +1,27 @@
+name: FreeHotels public health proof
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Railway public endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://freehotels-live-production.up.railway.app"
+          for i in {1..12}; do
+            if curl -fsS --max-time 15 "$BASE/health" | grep -q '^ok'; then
+              break
+            fi
+            sleep 5
+          done
+          curl -fsS --max-time 20 "$BASE/health" | tee health.txt | grep -q '^ok'
+          curl -fsS --max-time 20 "$BASE/" | tee home.html | grep -qi 'FreeHotels'
+          curl -fsS --max-time 20 "$BASE/robots.txt" | tee robots.txt | grep -qi 'sitemap'
+          curl -fsS --max-time 20 "$BASE/sitemap-index.xml" | tee sitemap-index.xml | grep -qi '<sitemapindex'
+          curl -fsS --max-time 20 "$BASE/sitemap-news.xml" | tee sitemap-news.xml | grep -qi '<urlset'
+          echo "HTTP_PROOF_PASS"
