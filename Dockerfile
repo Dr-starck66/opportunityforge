@@ -2,12 +2,12 @@ FROM node:22-alpine AS astra-gate
 WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev --no-audit --no-fund
-COPY .astra-green-release.sha256 ./.astra-green-release.sha256
+COPY .astra-green-release.blobsha ./.astra-green-release.blobsha
 COPY site.b64 ./site.b64
 COPY config/astra-seo-self-heal.json ./config/astra-seo-self-heal.json
 COPY scripts/astra-seo-self-heal.mjs ./scripts/astra-seo-self-heal.mjs
-COPY scripts/astra-seo-self-heal.test.mjs ./scripts/astra-seo-self-heal.test.mjs
-RUN sha256sum -c .astra-green-release.sha256
+COPY scripts/astra-seo-self-heal.test.mjs ./scripts/astra-seo-self-heal.test.mjs\nCOPY scripts/astra-verify-green-token.mjs ./scripts/astra-verify-green-token.mjs
+RUN node scripts/astra-verify-green-token.mjs
 RUN node --test scripts/astra-seo-self-heal.test.mjs
 RUN node scripts/astra-seo-self-heal.mjs --apply
 RUN node scripts/astra-seo-self-heal.mjs
