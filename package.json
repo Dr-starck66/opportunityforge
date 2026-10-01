@@ -7,7 +7,10 @@
     "node": ">=22"
   },
   "scripts": {
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "seo:self-heal": "node scripts/astra-seo-self-heal.mjs --apply",
+    "seo:self-heal:audit": "node scripts/astra-seo-self-heal.mjs",
+    "test:self-heal": "node --test scripts/astra-seo-self-heal.test.mjs"
   },
   "dependencies": {
     "adm-zip": "^0.5.16",
