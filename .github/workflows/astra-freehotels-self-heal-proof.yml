@@ -1,0 +1,35 @@
+name: ASTRA FreeHotels SELF-HEAL Proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "site.b64"
+      - "package.json"
+      - "config/astra-seo-self-heal.json"
+      - "scripts/astra-seo-self-heal.mjs"
+      - "scripts/astra-seo-self-heal.test.mjs"
+      - "scripts/astra-verify-green-token.mjs"
+      - "astra-self-heal-proof.trigger"
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund
+      - name: Engine regression tests
+        run: npm run test:self-heal
+      - name: Apply deterministic repair in ephemeral workspace
+        run: npm run seo:self-heal
+      - name: Re-audit repaired bundle
+        run: npm run seo:self-heal:audit
+      - name: Proof marker
+        run: echo "ASTRA_FREEHOTELS_SELF_HEAL_PROOF_PASS"
