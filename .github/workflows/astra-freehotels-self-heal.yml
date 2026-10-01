@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths-ignore:
-      - ".astra-green-release.sha256"
+      - ".astra-green-release.blobsha"
       - ".astra-green-release.json"
   workflow_dispatch:
 
@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install exact declared dependencies
+      - name: Install declared dependencies
         run: npm install --no-audit --no-fund
 
       - name: Prove self-heal engine
@@ -69,14 +69,13 @@ jobs:
           fi
           echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Create GREEN content checksum
+      - name: Create GREEN Git blob token
         shell: bash
         env:
           SOURCE_SHA: ${{ steps.repair.outputs.source_sha }}
         run: |
           set -euo pipefail
-          sha256sum site.b64 > .astra-green-release.sha256
-          HASH="$(cut -d' ' -f1 .astra-green-release.sha256)"
+          printf "%s  site.b64\n" "$(git hash-object site.b64)" > .astra-green-release.blobsha
           node <<'NODE'
           const fs=require("fs");
           const marker={
@@ -84,7 +83,7 @@ jobs:
             site:"freehotels.info",
             sourceSha:process.env.SOURCE_SHA,
             bundle:"site.b64",
-            sha256:fs.readFileSync(".astra-green-release.sha256","utf8").trim().split(/\s+/)[0],
+            gitBlobSha:fs.readFileSync(".astra-green-release.blobsha","utf8").trim().split(/\s+/)[0],
             greenVerified:true,
             controller:"ASTRA_FREEHOTELS_SELF_HEAL",
             verifiedAt:new Date().toISOString()
@@ -103,7 +102,7 @@ jobs:
             echo "ASTRA_FREEHOTELS_BLOCKED: repository race before GREEN token"
             exit 78
           fi
-          git add .astra-green-release.sha256 .astra-green-release.json
+          git add .astra-green-release.blobsha .astra-green-release.json
           if git diff --cached --quiet; then
             echo "GREEN token already current."
             exit 0
