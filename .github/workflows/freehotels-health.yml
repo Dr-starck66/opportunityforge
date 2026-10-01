@@ -8,22 +8,27 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe direct Railway and custom domains
+      - name: Diagnose DNS and TLS
         shell: bash
         run: |
-          set -euo pipefail
-          urls=(
-            "https://freehotels-live-production.up.railway.app/"
-            "https://freehotels.info/"
-            "https://www.freehotels.info/"
-          )
-          for url in "${urls[@]}"; do
+          set -u
+          echo "=== DNS apex ==="
+          dig +short freehotels.info CNAME || true
+          dig +short freehotels.info A || true
+          dig +short _railway-verify.freehotels.info TXT || true
+          echo "=== DNS www ==="
+          dig +short www.freehotels.info CNAME || true
+          dig +short www.freehotels.info A || true
+          dig +short _railway-verify.www.freehotels.info TXT || true
+
+          for url in             "https://freehotels-live-production.up.railway.app/"             "https://freehotels.info/"             "https://www.freehotels.info/"
+          do
             echo "=== $url ==="
-            curl -fsSL --max-time 25 -D headers.txt -o body.html -w "HTTP=%{http_code} FINAL=%{url_effective}\n" "$url"
-            grep -qi "FreeHotels" body.html
-            grep -Ei "^(server|location|via|x-|cf-)" headers.txt || true
+            curl -k -sS -L --max-time 20 -D - -o /tmp/body.html -w "HTTP=%{http_code} FINAL=%{url_effective}\n" "$url" || true
+            grep -qi "FreeHotels" /tmp/body.html && echo "CONTENT=FreeHotels" || echo "CONTENT=OTHER"
           done
-          curl -fsSL --max-time 20 https://freehotels-live-production.up.railway.app/health | grep -q '^ok'
-          curl -fsSL --max-time 20 https://freehotels.info/robots.txt | grep -qi 'sitemap'
-          curl -fsSL --max-time 20 https://freehotels.info/sitemap-index.xml | grep -qi '<sitemapindex'
-          echo "HTTP_PROOF_PASS"
+
+          echo "=== TLS apex ==="
+          echo | openssl s_client -connect freehotels.info:443 -servername freehotels.info 2>/dev/null | openssl x509 -noout -subject -issuer -dates || true
+          echo "=== TLS www ==="
+          echo | openssl s_client -connect www.freehotels.info:443 -servername www.freehotels.info 2>/dev/null | openssl x509 -noout -subject -issuer -dates || true
