@@ -1,6 +1,6 @@
 [build]
-builder = "RAILPACK"
-buildCommand = "npm install --omit=dev --no-audit --no-fund && npm run release:verify-green && npm run test:self-heal && npm run seo:self-heal && npm run seo:self-heal:audit"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "npm start"
