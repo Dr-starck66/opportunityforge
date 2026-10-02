@@ -1,8 +1,9 @@
 [build]
-builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile"
+builder = "RAILPACK"
+buildCommand = "npm install --omit=dev --no-audit --no-fund && npm run release:verify-green && npm run test:self-heal && npm run seo:self-heal && npm run seo:self-heal:audit"
 
 [deploy]
+startCommand = "npm start"
 healthcheckPath = "/health"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
