@@ -1,7 +1,7 @@
 d780391ac7f20c1af0fb3c42c49523cbd21e03c5  site.b64
 23b5643da3777605618d2e47197643732de845c7  scripts/astra-verify-green-token.mjs
 0b19f3fdeac548bbf87207fc3c4c21ae08fbad79  scripts/astra-seo-self-heal.test.mjs
-c24e3e3417d380c232b131340adbc9bc32402c01  scripts/astra-seo-self-heal.mjs
+f950f941fe1a8cc1fc20dd92e7f01b71ba42f6cb  scripts/astra-seo-self-heal.mjs
 20517a267badbe226d519b80d4d843ff458f0b32  package.json
 2cecf7a5ab61a5a3967a34360deff16c8c30bba9  Dockerfile
 67c35d8f07dd7885c27193aa2c343485fc3743fb  config/astra-seo-self-heal.json
