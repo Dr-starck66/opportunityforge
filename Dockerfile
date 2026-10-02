@@ -14,6 +14,7 @@ COPY scripts/astra-seo-self-heal.mjs ./scripts/astra-seo-self-heal.mjs
 COPY scripts/astra-seo-self-heal.test.mjs ./scripts/astra-seo-self-heal.test.mjs
 COPY scripts/astra-verify-green-token.mjs ./scripts/astra-verify-green-token.mjs
 COPY affilhunt-app ./affilhunt-app
+COPY entrypoint.mjs ./entrypoint.mjs
 
 RUN node scripts/astra-verify-green-token.mjs
 RUN node --test scripts/astra-seo-self-heal.test.mjs
@@ -23,4 +24,4 @@ RUN node scripts/astra-seo-self-heal.mjs
 ENV NODE_ENV=production
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD node -e "const p=process.env.PORT||80;fetch('http://127.0.0.1:'+p+'/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
-CMD ["npm","start"]
+CMD ["node","entrypoint.mjs"]
