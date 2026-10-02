@@ -6,6 +6,7 @@ RUN npm install --omit=dev --no-audit --no-fund
 
 COPY .astra-green-release.blobsha ./.astra-green-release.blobsha
 COPY Dockerfile ./Dockerfile
+COPY railway.toml ./railway.toml
 COPY server.mjs ./server.mjs
 COPY site.b64 ./site.b64
 COPY config/astra-seo-self-heal.json ./config/astra-seo-self-heal.json
