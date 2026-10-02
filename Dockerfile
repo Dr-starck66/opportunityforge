@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev --no-audit --no-fund
 COPY .astra-green-release.blobsha ./.astra-green-release.blobsha
+COPY Dockerfile ./Dockerfile
 COPY site.b64 ./site.b64
 COPY config/astra-seo-self-heal.json ./config/astra-seo-self-heal.json
 COPY scripts/astra-seo-self-heal.mjs ./scripts/astra-seo-self-heal.mjs
