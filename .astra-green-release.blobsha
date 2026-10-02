@@ -3,7 +3,7 @@ d780391ac7f20c1af0fb3c42c49523cbd21e03c5  site.b64
 0b19f3fdeac548bbf87207fc3c4c21ae08fbad79  scripts/astra-seo-self-heal.test.mjs
 f950f941fe1a8cc1fc20dd92e7f01b71ba42f6cb  scripts/astra-seo-self-heal.mjs
 20517a267badbe226d519b80d4d843ff458f0b32  package.json
-750b835ce630e28f073858f4f5762d8a31675df0  Dockerfile
+a17d50b9732ad3a3311275bacc5e80f6536fd2c0  Dockerfile
 67c35d8f07dd7885c27193aa2c343485fc3743fb  config/astra-seo-self-heal.json
 cc327d65b969ff90b72a2b9a355a3fec6f1969c7  server.mjs
 a012602bc5011af80d080f6f06a707165ed38351  railway.toml
