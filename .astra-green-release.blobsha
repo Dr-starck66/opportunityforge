@@ -1,5 +1,5 @@
 da3f23e08b7f465fc776fcbe0c9cfba095a2f1e1  Dockerfile
-4ce73a9d0d151244d17191c0e8d947d73c06fc5e  scripts/astra-verify-green-token.mjs
+8c85060c05102a55a1b497a27b78cde671b7b000  scripts/astra-verify-green-token.mjs
 0b19f3fdeac548bbf87207fc3c4c21ae08fbad79  scripts/astra-seo-self-heal.test.mjs
 c24e3e3417d380c232b131340adbc9bc32402c01  scripts/astra-seo-self-heal.mjs
 67c35d8f07dd7885c27193aa2c343485fc3743fb  config/astra-seo-self-heal.json
