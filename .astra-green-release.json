@@ -1,11 +1,10 @@
 {
   "schema": "astra-green-release/v1",
   "site": "freehotels.info",
-  "sourceSha": "63ba4b4160448972c215b764b342f5b0dd6c8952",
+  "sourceSha": "dd4d671d7e25ac0e7d82425530b70e7b0503e079",
   "bundle": "site.b64",
   "gitBlobSha": "d780391ac7f20c1af0fb3c42c49523cbd21e03c5",
   "greenVerified": true,
-  "controller": "ASTRA_FREEHOTELS_SELF_HEAL_BOOTSTRAP",
-  "verifiedAt": "2026-10-01T23:32:27.702Z",
-  "note": "Bootstrap token authorizes the current bundle for build-time self-heal validation; production still requires a successful Railway build and healthcheck."
+  "controller": "ASTRA_FREEHOTELS_SELF_HEAL",
+  "verifiedAt": "2026-10-02T21:41:21.348Z"
 }
