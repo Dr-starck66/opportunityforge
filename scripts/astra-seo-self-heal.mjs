@@ -101,7 +101,7 @@ for(const [name,entry] of entries){
 
 const robotsName=cfg.robotsFile;
 const robots=text(robotsName);
-const preferredSitemap=cfg.canonicalBase.replace(/\/$/,"/")+cfg.preferredSitemap;
+const preferredSitemap=cfg.canonicalBase.replace(/\/+$/,"")+"/"+String(cfg.preferredSitemap||"").replace(/^\/+/, "");
 if(robots && /User-agent:\s*\*[\s\S]*?Disallow:\s*\/\s*(?:$|\r?\n)/i.test(robots)){
   blocked.push({file:robotsName,reason:"global-disallow-root"});
 }
