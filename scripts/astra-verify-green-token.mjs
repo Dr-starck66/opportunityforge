@@ -14,7 +14,7 @@ if(!lines.length){
   process.exit(78);
 }
 for(const line of lines){
-  const m=line.match(/^([0-9a-f]{40})s+(.+)$/i);
+  const m=line.match(/^([0-9a-f]{40})\\s+(.+)$/i);
   if(!m){
     console.error("ASTRA_GREEN_TOKEN_BLOCKED: malformed line "+line);
     process.exit(78);
