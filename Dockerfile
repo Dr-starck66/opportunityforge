@@ -6,7 +6,8 @@ COPY .astra-green-release.blobsha ./.astra-green-release.blobsha
 COPY site.b64 ./site.b64
 COPY config/astra-seo-self-heal.json ./config/astra-seo-self-heal.json
 COPY scripts/astra-seo-self-heal.mjs ./scripts/astra-seo-self-heal.mjs
-COPY scripts/astra-seo-self-heal.test.mjs ./scripts/astra-seo-self-heal.test.mjs\nCOPY scripts/astra-verify-green-token.mjs ./scripts/astra-verify-green-token.mjs
+COPY scripts/astra-seo-self-heal.test.mjs ./scripts/astra-seo-self-heal.test.mjs
+COPY scripts/astra-verify-green-token.mjs ./scripts/astra-verify-green-token.mjs
 RUN node scripts/astra-verify-green-token.mjs
 RUN node --test scripts/astra-seo-self-heal.test.mjs
 RUN node scripts/astra-seo-self-heal.mjs --apply
