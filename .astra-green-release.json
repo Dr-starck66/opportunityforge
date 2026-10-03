@@ -1,10 +1,10 @@
 {
   "schema": "astra-green-release/v1",
   "site": "freehotels.info",
-  "sourceSha": "3bada6357a3fbe5a786b3537a0f6c4c4afe4cdd0",
+  "sourceSha": "e3d782b15b28f409a9f31a349a0194fcd8efaf9a",
   "bundle": "site.b64",
   "gitBlobSha": "d780391ac7f20c1af0fb3c42c49523cbd21e03c5",
   "greenVerified": true,
   "controller": "ASTRA_FREEHOTELS_SELF_HEAL",
-  "verifiedAt": "2026-10-03T19:27:50.899Z"
+  "verifiedAt": "2026-10-03T19:29:16.364Z"
 }
