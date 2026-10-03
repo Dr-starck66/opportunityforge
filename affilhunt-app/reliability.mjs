@@ -8,5 +8,5 @@ export function reliabilitySnapshot(env=process.env){
   langfuse:{status:configured("LANGFUSE_PUBLIC_KEY","LANGFUSE_SECRET_KEY","LANGFUSE_BASE_URL")?"CONFIGURED":"UNCONFIGURED"}
  };
  const active=Object.values(components).filter(x=>x.status==="CONFIGURED").length;
- return {schema:"astra-reliability/v1",service:"affilhunt-private-omega",status:active===5?"PASS":active>0?"PARTIAL":"UNVERIFIED",components,timestamp:new Date().toISOString()};
+ return {schema:"astra-reliability/v1",service:"affilhunt-private-omega",status:active>0?"PARTIAL":"UNVERIFIED",components,timestamp:new Date().toISOString()};
 }
