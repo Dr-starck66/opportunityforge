@@ -1,1 +1,0 @@
-freehotels-live dockerfile trigger 2026-10-02T00:45+02:00
