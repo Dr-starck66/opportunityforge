@@ -1,8 +1,13 @@
 {
-  "name":"affilhunt-private-omega",
-  "version":"0.1.0",
-  "private":true,
-  "type":"module",
-  "engines":{"node":">=22"},
-  "scripts":{"start":"node bootstrap.mjs"}
+  "name": "affilhunt-private-omega",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "npm run check && node bootstrap.mjs",
+    "check": "node --check bootstrap.mjs && node --check reliability.mjs"
+  }
 }
